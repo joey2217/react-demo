@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { PropsWithChildren } from 'react'
 
 export type Theme = 'dark' | 'light'
 
 interface ThemeProps {
   theme: Theme
-  setTheme: (t: Theme) => void
+  setTheme: React.Dispatch<React.SetStateAction<Theme>>
 }
 
 const ThemeContext = React.createContext<ThemeProps>({
@@ -19,6 +19,11 @@ export function useTheme() {
 
 export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(getTheme())
+  
+  useEffect(() => {
+    setLocalTheme(theme)
+  }, [theme])
+  
   return (
     <ThemeContext.Provider
       value={{
@@ -39,7 +44,20 @@ function getTheme(): Theme {
     (!(LOCAL_THEME in localStorage) &&
       window.matchMedia('(prefers-color-scheme: dark)').matches)
   ) {
+    document.documentElement.classList.add('dark')
     return 'dark'
   }
+  document.documentElement.classList.remove('dark')
   return 'light'
+}
+
+function setLocalTheme(theme: Theme) {
+  if (theme) {
+    localStorage.setItem(LOCAL_THEME, theme)
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }
 }

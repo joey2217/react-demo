@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* antd icon */
-/* @layer base {
-    svg { 
-        display: inline;
-        vertical-align: baseline; 
-    }
-} */
+html {
+  color: rgba(0, 0, 0, 0.88);
+  background-color: rgb(255, 255, 255);
+}
+
+html.dark {
+  background-color: rgb(20, 20, 20);
+  color: rgba(255, 255, 255, 0.85);
+}
