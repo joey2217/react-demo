@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* antd icon */
+/* @layer base {
+    svg { 
+        display: inline;
+        vertical-align: baseline; 
+    }
+} */
