@@ -28,7 +28,7 @@ const ThemeButton: React.FC = () => {
   const { theme, setTheme } = useTheme()
   return (
     <div
-      className="flex items-center justify-center cursor-pointer w-6 h-6 text-teal-400"
+      className="flex items-center justify-center cursor-pointer w-6 h-6"
       onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
     >
       {theme === 'dark' ? <IcOutlineDarkMode /> : <IcOutlineWbSunny />}
