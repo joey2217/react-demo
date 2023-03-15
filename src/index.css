@@ -11,3 +11,7 @@ html.dark {
   background-color: rgb(20, 20, 20);
   color: rgba(255, 255, 255, 0.85);
 }
+
+a.active{
+  @apply text-teal-500;
+}
