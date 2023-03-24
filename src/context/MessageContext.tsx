@@ -73,7 +73,7 @@ const DEFALUT_MESSAGE_OPTION: MessageOption = {
 export const MessageProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [showModal, setShowModal] = useState(false)
   const [msg, setMsg] = useState('')
-  const [messageOption, setMessageOption] = useState(DEFALUT_MESSAGE_OPTION)
+  const [messageOption, setMessageOption] = useState<MessageOption>(DEFALUT_MESSAGE_OPTION)
 
   useEffect(() => {
     if (showModal) {

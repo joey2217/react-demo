@@ -1,13 +1,17 @@
 import React, { memo } from 'react'
-import type { PropsWithChildren, ReactNode } from 'react'
+import type { PropsWithChildren, ReactNode, HTMLAttributes } from 'react'
 
 interface Props {
   title?: ReactNode
 }
 
-const Card: React.FC<PropsWithChildren<Props>> = ({ children, title }) => {
+const Card: React.FC<
+  PropsWithChildren<HTMLAttributes<HTMLDivElement> & Props>
+> = ({ children, title, className }) => {
   return (
-    <section className="rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 shadow-xl p-1">
+    <section
+      className={`rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 shadow-xl p-1 ${className}`}
+    >
       <div className="rounded-2xl bg-gray-50 dark:bg-gray-700">
         {title && (
           <div className="px-4 pt-3">

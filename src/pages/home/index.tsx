@@ -1,37 +1,32 @@
 import React, { memo } from 'react'
+import Button from '../../components/base/Button'
 import Card from '../../components/Card'
 import { useMessage } from '../../context/MessageContext'
 
 const Home: React.FC = () => {
   const message = useMessage()
   return (
-    <div className="container mx-auto">
+    <div>
       <Card title="Message">
         <div className="grid grid-cols-12">
           <div className="col-span-4">
-            <button
-              className="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-              onClick={() => message.success('success')}
-            >
+            <Button type="primary" onClick={() => message.success('success')}>
               success
-            </button>
+            </Button>
           </div>
           <div className="col-span-4">
-            <button
-              className="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-              onClick={() => message.error('error')}
-            >
-              error
-            </button>
+            <Button onClick={() => message.error('error')}>error</Button>
           </div>
           <div className="col-span-4">
-            <button
-              className="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-              onClick={() => message.info('info')}
-            >
-              info
-            </button>
+            <Button onClick={() => message.info('info')}>info</Button>
           </div>
+        </div>
+      </Card>
+      <h2 className="font-bold text-2xl p-2">Components</h2>
+      <Card title="Button" className="mt-4">
+        <div className="grid gap-4 grid-cols-12">
+          <Button>defalut</Button>
+          <Button type="primary">primary</Button>
         </div>
       </Card>
     </div>

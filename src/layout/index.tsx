@@ -6,7 +6,7 @@ const AppLayout: React.FC = () => {
   return (
     <div className="container mx-auto px-1">
       <Header />
-      <main className="py-4">
+      <main className="container mx-auto px-1 py-4">
         <Outlet />
       </main>
     </div>
