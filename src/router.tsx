@@ -3,6 +3,7 @@ import Layout from './layout'
 import Error from './pages/error'
 import Home from './pages/home'
 import Message from './pages/message'
+import Drag from './pages/drag'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
       {
         path: 'message',
         element: <Message />,
+        errorElement: <Error />,
+      },
+      {
+        path: 'drag',
+        element: <Drag />,
         errorElement: <Error />,
       },
     ],

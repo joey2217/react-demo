@@ -27,6 +27,10 @@ const routes = [
     to: '/message',
     label: 'Message',
   },
+  {
+    to: '/drag',
+    label: 'Drag',
+  },
 ]
 
 const Header: React.FC = () => {
@@ -37,7 +41,7 @@ const Header: React.FC = () => {
         <span>ReactDemo</span>
       </Link>
       <nav className="flex-1 px-2">
-        <ul className="flex items-center">
+        <ul className="flex items-center gap-4">
           {routes.map((r) => (
             <li key={r.to}>
               <ActiveLink to={r.to}>{r.label}</ActiveLink>

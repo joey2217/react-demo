@@ -19,3 +19,7 @@ html.dark {
 .link.active {
   @apply text-teal-500;
 }
+
+.droppable-container {
+  height: calc(100vh - 130px);
+}
