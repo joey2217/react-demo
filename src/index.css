@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 html {
+  color-scheme: light;
   color: rgba(0, 0, 0, 0.88);
   background-color: rgb(255, 255, 255);
 }
 
 html.dark {
+  color-scheme: dark;
   background-color: rgb(20, 20, 20);
   color: rgba(255, 255, 255, 0.85);
 }
@@ -22,4 +24,19 @@ html.dark {
 
 .droppable-container {
   height: calc(100vh - 130px);
+}
+
+button:disabled {
+  @apply cursor-not-allowed text-gray-400;
+}
+
+.pagination li > button:enabled {
+  @apply hover:bg-gray-400/50;
+}
+
+.pagination li > button {
+  @apply inline-flex h-8 w-8 items-center justify-center rounded;
+}
+.pagination li > button.current {
+  @apply bg-teal-500/70 text-white hover:bg-teal-500/50;
 }

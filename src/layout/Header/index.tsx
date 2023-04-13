@@ -31,6 +31,10 @@ const routes = [
     to: '/drag',
     label: 'Drag',
   },
+  {
+    to: '/page',
+    label: 'Pagination',
+  },
 ]
 
 const Header: React.FC = () => {

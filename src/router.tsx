@@ -4,6 +4,7 @@ import Error from './pages/error'
 import Home from './pages/home'
 import Message from './pages/message'
 import Drag from './pages/drag'
+import Page from './pages/page'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
       {
         path: 'drag',
         element: <Drag />,
+        errorElement: <Error />,
+      },
+      {
+        path: 'page',
+        element: <Page />,
         errorElement: <Error />,
       },
     ],
