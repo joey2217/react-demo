@@ -1,10 +1,11 @@
-import React, { memo, useEffect, useMemo, useState } from 'react'
+import React, { memo, useCallback, useMemo, useState } from 'react'
 import { DoubleArrowLeft, DoubleArrowRight } from '../Icons'
 
 interface Props {
   total?: number
   current?: number
   size?: number
+  hideOnSinglePage?: boolean
   onChange?: (page: number) => void
 }
 
@@ -12,13 +13,14 @@ const Pagination: React.FC<Props> = ({
   total = 0,
   current = 1,
   size = 10,
+  hideOnSinglePage = false,
   onChange,
 }) => {
   const [page, setPage] = useState(current)
 
   const pageNum = useMemo(() => {
     if (total > 0 && size > 0) {
-      return Math.floor(total / size)
+      return Math.ceil(total / size)
     }
     return 0
   }, [size, total])
@@ -31,9 +33,32 @@ const Pagination: React.FC<Props> = ({
     return pageNum === 0 || page === pageNum
   }, [page, pageNum])
 
-  useEffect(() => {
-    onChange && onChange(page)
-  }, [onChange, page])
+  const onPageChange = useCallback(
+    (p: number) => {
+      setPage(p)
+      onChange && onChange(p)
+    },
+    [onChange]
+  )
+
+  const onPageJump = useCallback(
+    (dir: 'next' | 'prev') => {
+      if (dir === 'next') {
+        setPage((p) => {
+          const n = p + 5 < pageNum ? p + 5 : pageNum
+          onChange && onChange(n)
+          return n
+        })
+      } else {
+        setPage((p) => {
+          const n = p > 5 ? p - 5 : 1
+          onChange && onChange(n)
+          return n
+        })
+      }
+    },
+    [onChange, pageNum]
+  )
 
   const pages = useMemo(() => {
     if (pageNum === 0) {
@@ -47,7 +72,7 @@ const Pagination: React.FC<Props> = ({
         <li key={index}>
           <button
             title={`${index + 1}`}
-            onClick={() => setPage(index + 1)}
+            onClick={() => onPageChange(index + 1)}
             className={`${page === index + 1 ? 'current' : ' '}`}
           >
             {index + 1}
@@ -77,7 +102,7 @@ const Pagination: React.FC<Props> = ({
             <li>
               <button
                 title="1"
-                onClick={() => setPage(1)}
+                onClick={() => onPageChange(1)}
                 className={`${page === 1 ? 'current' : ' '}`}
               >
                 1
@@ -86,10 +111,7 @@ const Pagination: React.FC<Props> = ({
           )}
           {showPrev5 && (
             <li>
-              <button
-                title="向前5页"
-                onClick={() => setPage((p) => (p > 5 ? p - 5 : 1))}
-              >
+              <button title="向前5页" onClick={() => onPageJump('prev')}>
                 <DoubleArrowLeft />
               </button>
             </li>
@@ -98,7 +120,7 @@ const Pagination: React.FC<Props> = ({
             <li key={p}>
               <button
                 title={`${p}`}
-                onClick={() => setPage(p)}
+                onClick={() => onPageChange(p)}
                 className={`${page === p ? 'current' : ' '}`}
               >
                 {p}
@@ -107,12 +129,7 @@ const Pagination: React.FC<Props> = ({
           ))}
           {showNext5 && (
             <li>
-              <button
-                title="向后5页"
-                onClick={() =>
-                  setPage((p) => (p + 5 < pageNum ? p + 5 : pageNum))
-                }
-              >
+              <button title="向后5页" onClick={() => onPageJump('next')}>
                 <DoubleArrowRight />
               </button>
             </li>
@@ -121,7 +138,7 @@ const Pagination: React.FC<Props> = ({
             <li>
               <button
                 title={`${pageNum}`}
-                onClick={() => setPage(pageNum)}
+                onClick={() => onPageChange(pageNum)}
                 className={`${page === pageNum ? 'current' : ' '}`}
               >
                 {pageNum}
@@ -131,10 +148,14 @@ const Pagination: React.FC<Props> = ({
         </>
       )
     }
-  }, [page, pageNum])
+  }, [onPageChange, onPageJump, page, pageNum])
+
+  if (hideOnSinglePage && pageNum === 1) {
+    return null
+  }
 
   return (
-    <ol className="pagination flex justify-center gap-1 text-sm font-medium">
+    <ol className="pagination flex justify-center gap-1 text-sm overflow-hidden">
       <li>
         <button
           disabled={disabledPrev}

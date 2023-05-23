@@ -35,6 +35,10 @@ const routes = [
     to: '/page',
     label: 'Pagination',
   },
+  {
+    to: '/modal',
+    label: 'Modal',
+  },
 ]
 
 const Header: React.FC = () => {

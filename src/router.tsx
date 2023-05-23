@@ -5,6 +5,7 @@ import Home from './pages/home'
 import Message from './pages/message'
 import Drag from './pages/drag'
 import Page from './pages/page'
+import Modal from './pages/modal'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
       {
         path: 'page',
         element: <Page />,
+        errorElement: <Error />,
+      },
+      {
+        path: 'modal',
+        element: <Modal />,
         errorElement: <Error />,
       },
     ],
