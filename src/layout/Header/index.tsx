@@ -1,26 +1,25 @@
 import React, { memo } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import ThemeButton from './ThemeButton'
-import type { LinkProps } from 'react-router-dom'
 import { FaBrandsReact, MdiGithub } from '../../components/Icons'
 
-const ActiveLink: React.FC<
-  LinkProps &
-    React.RefAttributes<HTMLAnchorElement> & {
-      activeClassName?: string
-    }
-> = ({ children, to, activeClassName = 'active', ...props }) => {
-  const { pathname } = useLocation()
-  return (
-    <Link
-      className={`link ${pathname === to ? activeClassName : ' '}`}
-      to={to}
-      {...props}
-    >
-      {children}
-    </Link>
-  )
-}
+// const ActiveLink: React.FC<
+//   LinkProps &
+//     React.RefAttributes<HTMLAnchorElement> & {
+//       activeClassName?: string
+//     }
+// > = ({ children, to, activeClassName = 'active', ...props }) => {
+//   const { pathname } = useLocation()
+//   return (
+//     <Link
+//       className={`link ${pathname === to ? activeClassName : ' '}`}
+//       to={to}
+//       {...props}
+//     >
+//       {children}
+//     </Link>
+//   )
+// }
 
 const routes = [
   {
@@ -39,6 +38,10 @@ const routes = [
     to: '/modal',
     label: 'Modal',
   },
+  {
+    to: '/tailwind',
+    label: 'TailwindComponents',
+  },
 ]
 
 const Header: React.FC = () => {
@@ -49,10 +52,12 @@ const Header: React.FC = () => {
         <span>ReactDemo</span>
       </Link>
       <nav className="flex-1 px-2">
-        <ul className="flex items-center gap-4">
+        <ul className="flex items-center gap-4 divide-x-1">
           {routes.map((r) => (
             <li key={r.to}>
-              <ActiveLink to={r.to}>{r.label}</ActiveLink>
+              <NavLink className="link" to={r.to}>
+                {r.label}
+              </NavLink>
             </li>
           ))}
         </ul>

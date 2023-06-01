@@ -6,6 +6,8 @@ import Message from './pages/message'
 import Drag from './pages/drag'
 import Page from './pages/page'
 import Modal from './pages/modal'
+import Tailwind from './pages/tailwind'
+import Button from './pages/tailwind/button'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,18 @@ const router = createBrowserRouter([
         path: 'modal',
         element: <Modal />,
         errorElement: <Error />,
+      },
+      {
+        path: 'tailwind',
+        element: <Tailwind />,
+        errorElement: <Error />,
+        children: [
+          {
+            index: true,
+            element: <Button />,
+            errorElement: <Error />,
+          },
+        ],
       },
     ],
   },

@@ -26,10 +26,6 @@ html.dark {
   height: calc(100vh - 130px);
 }
 
-button:disabled {
-  @apply cursor-not-allowed text-gray-400;
-}
-
 .pagination li > button:enabled {
   @apply hover:bg-gray-400/50;
 }
